@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  upload-artifacts:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Create sample files
+      run: |
+        echo "Sample content for scan.scan" > anupamas01_scan.scan
+        echo "Sample content for scan.properties" > anupamas01_scan.properties
+
+    - name: Upload sample files as artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: scan-files
+        path: |
+          anupamas01_scan.scan
+          anupamas01_scan.properties
